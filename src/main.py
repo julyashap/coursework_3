@@ -1,8 +1,8 @@
-from utils import get_output
+from src.utils import get_output
 
 
 def main():
-    print(get_output())
+    print(get_output("operations.json"))
 
 
 main()
