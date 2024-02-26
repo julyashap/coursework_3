@@ -1,21 +1,22 @@
 import json
 from datetime import date
+import os.path
 
 
-def get_list_from_json():
+def get_list_from_json(file_name):
     """
     Возвращает список транзакций клиента
     """
-    with open("../operations.json") as file:
+    with open(os.path.join("..", file_name)) as file:
         customer_transactions = json.load(file)
     return customer_transactions
 
 
-def get_set_up_transactions():
+def get_set_up_transactions(file_name):
     """
     Вовзвращает отформатированный список транзакций клиента
     """
-    customer_transactions = get_list_from_json()
+    customer_transactions = get_list_from_json(file_name)
     customized_transactions = customer_transactions.copy()
 
     for trans in customized_transactions:
@@ -25,11 +26,11 @@ def get_set_up_transactions():
     return customized_transactions
 
 
-def get_executed_transactions():
+def get_executed_transactions(file_name):
     """
     Возвращает список успешно завершенных транзакций
     """
-    customer_transactions = get_set_up_transactions()
+    customer_transactions = get_set_up_transactions(file_name)
 
     executed_transactions = [trans for trans in customer_transactions if trans['state'] == 'EXECUTED']
 
@@ -45,11 +46,11 @@ def convert_date_to_datetime(thedate):
     return new_date
 
 
-def get_sort_transactions_by_date():
+def get_sort_transactions_by_date(file_name):
     """
     Возвращает последние 5 успешно завершенных транзакций по дате
     """
-    customer_transactions = get_executed_transactions()
+    customer_transactions = get_executed_transactions(file_name)
     sorted_transactions = sorted(customer_transactions,
                                  key=lambda trans: convert_date_to_datetime(trans.get("date")),
                                  reverse=True)
@@ -134,11 +135,11 @@ def convert_date(thedate):
     return date_converted
 
 
-def get_output():
+def get_output(file_name):
     """
     Возвращает сформированный отчет о последних 5 успешных транзакциях клиента
     """
-    customer_transactions = get_sort_transactions_by_date()
+    customer_transactions = get_sort_transactions_by_date(file_name)
     result_output = ""
 
     for trans in customer_transactions:
