@@ -13,7 +13,7 @@ def get_list_from_json():
 
 def get_set_up_transactions():
     """
-
+    Вовзвращает отформатированный список транзакций клиента
     """
     customer_transactions = get_list_from_json()
     customized_transactions = customer_transactions.copy()
@@ -38,7 +38,7 @@ def get_executed_transactions():
 
 def convert_date_to_datetime(thedate):
     """
-
+    Возвращает сконвертированный в формат datetime параметр thedate
     """
     new_date = date(int(thedate[:4]), int(thedate[5:7]), int(thedate[8:10]))
 
@@ -47,7 +47,7 @@ def convert_date_to_datetime(thedate):
 
 def get_sort_transactions_by_date():
     """
-
+    Возвращает последние 5 успешно завершенных транзакций по дате
     """
     customer_transactions = get_executed_transactions()
     sorted_transactions = sorted(customer_transactions,
@@ -59,7 +59,7 @@ def get_sort_transactions_by_date():
 
 def convert_card_number(card_number):
     """
-
+    Возвращает сконвертированный в формат XXXX XX** **** XXXX параметр card_number
     """
     card_number_converted = card_number[:4] + " " + card_number[4:6] + "** **** " + card_number[-4:]
 
@@ -68,7 +68,7 @@ def convert_card_number(card_number):
 
 def convert_account_number(account_number):
     """
-
+    Возвращает сконвертированный в формат **XXXX параметр account_number
     """
     account_number_converted = ""
     count = 0
@@ -83,6 +83,9 @@ def convert_account_number(account_number):
 
 
 def get_card_number(card_number):
+    """
+    Возвращает номер карты
+    """
     card_number_splitted = card_number.split()
 
     for part in card_number_splitted:
@@ -91,6 +94,9 @@ def get_card_number(card_number):
 
 
 def get_bank_name(bank_name):
+    """
+    Возвращает название банка
+    """
     bank_name_splitted = bank_name.split()
 
     if bank_name_splitted[0] == "Счет":
@@ -106,6 +112,9 @@ def get_bank_name(bank_name):
 
 
 def select_converting(bank_number):
+    """
+    Возвращает способ конвертации номера счета или карты
+    """
     bank_number_splitted = bank_number.split()
 
     if bank_number_splitted[0] == "Счет":
@@ -116,7 +125,7 @@ def select_converting(bank_number):
 
 def convert_date(thedate):
     """
-
+    Возвращает сконвертированный в формат day.month.year параметр thedate
     """
     new_date = convert_date_to_datetime(thedate)
 
@@ -127,7 +136,7 @@ def convert_date(thedate):
 
 def get_output():
     """
-
+    Возвращает сформированный отчет о последних 5 успешных транзакциях клиента
     """
     customer_transactions = get_sort_transactions_by_date()
     result_output = ""
