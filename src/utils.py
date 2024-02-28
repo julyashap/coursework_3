@@ -71,14 +71,7 @@ def convert_account_number(account_number):
     """
     Возвращает сконвертированный в формат **XXXX параметр account_number
     """
-    account_number_converted = ""
-    count = 0
-
-    while count < len(account_number) - 4:
-        account_number_converted += "*"
-        count += 1
-
-    account_number_converted += account_number[-4:]
+    account_number_converted = "**" + account_number[-4:]
 
     return account_number_converted
 
