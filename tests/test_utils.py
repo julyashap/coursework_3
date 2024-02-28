@@ -449,7 +449,7 @@ def test_convert_card_number():
 
 
 def test_convert_account_number():
-    assert convert_account_number("28429442875257789335") == "****************9335"
+    assert convert_account_number("28429442875257789335") == "**9335"
 
 
 def test_get_card_number():
@@ -465,7 +465,7 @@ def test_get_bank_name():
 
 def test_select_converting():
     assert select_converting("Visa Gold 8702717057933248") == "8702 71** **** 3248"
-    assert select_converting("Счет 28429442875257789335") == "****************9335"
+    assert select_converting("Счет 28429442875257789335") == "**9335"
 
 
 def test_convert_date():
